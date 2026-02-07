@@ -1,0 +1,328 @@
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+    --bg-dark: #050505;
+    --primary: #4285F4; /* Google Blue */
+    --accent: #00F5D4;  /* Cyan */
+    --purple: #9D4EDD;
+    --google-red: #EA4335;
+    --google-yellow: #FBBC04;
+    --google-green: #34A853;
+    
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.08);
+    
+    --font: 'Outfit', sans-serif;
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: var(--bg-dark);
+    font-family: var(--font);
+    color: white;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* =========================================
+   2. BACKGROUND EFFECTS
+   ========================================= */
+.bg-layer {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.grid-overlay {
+    position: absolute;
+    width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: float 10s infinite alternate;
+}
+.blob-1 { width: 500px; height: 500px; background: var(--primary); top: -100px; left: -100px; }
+.blob-2 { width: 400px; height: 400px; background: var(--purple); bottom: -50px; right: -50px; }
+.blob-3 { width: 300px; height: 300px; background: var(--accent); top: 40%; left: 40%; opacity: 0.2; }
+
+@keyframes float {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(30px, 50px); }
+}
+
+/* =========================================
+   3. LAYOUT UTILITIES
+   ========================================= */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.section {
+    padding: 120px 0;
+    position: relative;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 80px;
+}
+
+/* =========================================
+   4. NAVBAR & HERO
+   ========================================= */
+.navbar {
+    display: flex; justify-content: space-between; padding: 25px 50px;
+    backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.logo { font-weight: 800; font-size: 1.6rem; letter-spacing: -1px; }
+.highlight { color: var(--primary); }
+
+.nav-btn {
+    text-decoration: none; color: white; border: 1px solid var(--border);
+    padding: 10px 25px; border-radius: 50px; font-size: 0.9rem;
+    background: rgba(255,255,255,0.05); transition: 0.3s; font-weight: 600;
+}
+.nav-btn:hover { background: white; color: black; transform: translateY(-2px); }
+
+.hero { padding: 100px 20px; min-height: 90vh; display: flex; align-items: center; }
+
+.hero-split {
+    display: flex; align-items: center; gap: 80px;
+    flex-wrap: wrap; 
+}
+
+.hero-text { flex: 1; min-width: 350px; }
+.hero-visual { flex: 1; min-width: 350px; display: flex; justify-content: center; }
+
+h1 { 
+    font-size: 4.5rem; 
+    line-height: 1.1; margin: 25px 0; 
+    font-weight: 800; letter-spacing: -2px;
+}
+
+.gradient-text {
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    background-clip: text;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.sub-text { color: #b0b0b0; font-size: 1.3rem; margin-bottom: 40px; max-width: 90%; }
+
+.cta-group { display: flex; align-items: center; gap: 25px; }
+
+/* Standard Button */
+.btn-primary {
+    background: white; color: black; padding: 16px 36px; border-radius: 50px;
+    text-decoration: none; font-weight: 700; display: inline-block;
+    transition: var(--transition); font-size: 1rem;
+}
+.btn-primary:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.4); 
+}
+
+.meta-tag { display: flex; align-items: center; gap: 8px; color: var(--accent); font-weight: 600; }
+
+.code-window {
+    background: #0f0f0f; border-radius: 16px; padding: 30px;
+    width: 100%; max-width: 450px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    border: 1px solid var(--border);
+    transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+    transition: var(--transition);
+}
+.code-window:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.02); }
+
+.window-header { display: flex; gap: 10px; margin-bottom: 20px; }
+.dot { width: 14px; height: 14px; border-radius: 50%; }
+.red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+
+.window-body { font-family: 'Fira Code', monospace; color: #d4d4d4; font-size: 0.95rem; line-height: 1.6; }
+.kwd { color: #c586c0; } .var { color: #9cdcfe; } .str { color: #ce9178; } .bool { color: #569cd6; } .func { color: #dcdcaa; }
+.indent { padding-left: 25px; }
+
+/* =========================================
+   5. STATS STRIP
+   ========================================= */
+.stats-strip {
+    background: rgba(255,255,255,0.02); 
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border); 
+    padding: 30px 0; margin: 20px 0;
+    backdrop-filter: blur(5px);
+}
+.stats-strip .container { display: flex; justify-content: space-evenly; align-items: center; }
+.stat { font-size: 1.1rem; color: #ccc; }
+.stat span { font-weight: 800; color: var(--primary); font-size: 2rem; margin-right: 10px; vertical-align: middle;}
+.divider { width: 1px; height: 40px; background: var(--border); }
+
+/* =========================================
+   6. AGENDA
+   ========================================= */
+.agenda-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 40px; 
+}
+.agenda-card {
+    background: var(--glass); 
+    border: 1px solid var(--border); 
+    padding: 40px; border-radius: 24px; 
+    transition: var(--transition);
+    position: relative; overflow: hidden;
+}
+.agenda-card:hover { 
+    background: rgba(255,255,255,0.06); 
+    border-color: var(--primary); 
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+.agenda-card.active-card { border-color: var(--primary); background: rgba(66, 133, 244, 0.05); }
+
+.time-badge {
+    background: rgba(66, 133, 244, 0.15); color: var(--primary);
+    display: inline-block; padding: 8px 16px; border-radius: 12px; 
+    font-size: 0.9rem; margin-bottom: 20px; font-weight: 700;
+}
+.agenda-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+.agenda-card p { color: #888; }
+
+/* =========================================
+   7. SPEAKERS
+   ========================================= */
+.grid-3 { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 40px; 
+}
+.speaker-card {
+    background: var(--glass); padding: 50px 30px; 
+    border-radius: 28px; text-align: center;
+    border: 1px solid var(--border); transition: var(--transition);
+}
+.speaker-card:hover { 
+    transform: translateY(-15px); border-color: var(--google-green); 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.img-wrapper {
+    width: 140px; height: 140px; margin: 0 auto 25px;
+    position: relative; padding: 4px;
+    background: linear-gradient(45deg, var(--primary), var(--google-green), var(--google-yellow), var(--google-red));
+    border-radius: 50%;
+}
+.img-wrapper img {
+    width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+    border: 5px solid #1a1a1a; background: #1a1a1a;
+}
+.speaker-card h3 { font-size: 1.4rem; margin-bottom: 5px; }
+.role { 
+    color: var(--accent); font-size: 0.9rem; 
+    text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
+}
+
+/* =========================================
+   8. FOOTER & REGISTER (FIXED)
+   ========================================= */
+.register-section { 
+    text-align: center; 
+    background: radial-gradient(circle at center, rgba(66, 133, 244, 0.15) 0%, transparent 70%); 
+    padding: 100px 0;
+}
+
+.register-section h2 { margin-bottom: 15px; }
+
+/* THE FIXED BIG BUTTON */
+.big-glow { 
+    font-size: 1.1rem; /* Smaller text */
+    padding: 18px 45px; /* Proportional padding */
+    background: linear-gradient(135deg, var(--primary), var(--accent)); /* Google Gradient */
+    color: #000; /* Black text for readability */
+    border: none;
+    box-shadow: 0 10px 30px rgba(66, 133, 244, 0.4);
+}
+
+.big-glow:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(0, 245, 212, 0.5); /* Intense cyan glow */
+    color: #000;
+}
+
+footer { 
+    text-align: center; padding: 50px; 
+    color: #666; font-size: 0.9rem; 
+    border-top: 1px solid var(--border); 
+    background: #020202; margin-top: 0;
+}
+
+/* Mobile Fixes */
+@media (max-width: 768px) {
+    h1 { font-size: 3rem; }
+    .hero-split { flex-direction: column; text-align: center; gap: 40px; }
+    .cta-group { justify-content: center; }
+    .code-window { display: none; }
+    .stats-strip .container { flex-direction: column; gap: 20px; }
+    .divider { display: none; }
+    .section { padding: 80px 0; }
+}
+/* =========================================
+   MOBILE FIXES (Paste at the bottom of style.css)
+   ========================================= */
+@media (max-width: 768px) {
+    /* 1. Fix the Navbar Squish */
+    .navbar {
+        padding: 15px 20px; /* Reduce padding so there is more room */
+        align-items: center;
+    }
+
+    /* 2. Fix the Logo Wrapping */
+    .logo {
+        font-size: 1.2rem; /* Make logo text smaller */
+        display: flex;
+        gap: 5px;
+        white-space: nowrap; /* Force "GDG Roorkee" to stay on one line */
+    }
+
+    /* 3. Fix the "Egg" Button */
+    .nav-btn {
+        font-size: 0.8rem; /* Smaller text */
+        padding: 8px 16px; /* Smaller button size */
+        white-space: nowrap; /* CRITICAL: This stops "Save my spot" from breaking lines */
+        min-width: auto; /* Let it shrink if needed */
+    }
+
+    /* 4. Fix Hero Section Spacing */
+    .hero {
+        padding: 60px 20px;
+        text-align: center;
+    }
+    
+    .hero h1 {
+        font-size: 2.8rem; /* Slightly smaller headline for mobile */
+    }
+    
+    /* Fix the Register Button looking too big */
+    .btn-primary {
+        padding: 14px 30px;
+        width: 100%; /* Make button full width on mobile for easier tapping */
+        max-width: 300px;
+    }
+}
