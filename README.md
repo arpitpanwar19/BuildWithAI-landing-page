@@ -4,7 +4,7 @@ A responsive, single-page website for the "Build with AI" workshop by GDG Roorke
 
 🔗 **Live Demo:** https://buildwithai-gdgroorkee.netlify.app
 
-📄 **Product Requirements:** [View PRD PDF]([/BuildWithAI-landing-page/](Product_Requirements_Document_ArpitPanwar.pdf))
+📄 **Product Requirements:** [View PRD PDF](/Product_Requirements_Document_ArpitPanwar.pdf)
 
 ## 📌 Event Details
 * **Event Name:** Build with AI
@@ -43,6 +43,7 @@ A responsive, single-page website for the "Build with AI" workshop by GDG Roorke
 * **Course:** B.Tech CSE (1st Year)
 
 * **Institution:** Roorkee Institute of Technology
+
 
 
 
